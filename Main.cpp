@@ -6,6 +6,7 @@
 using namespace std;
 
 int main(){
+	
 	//codigo = codigo de empleado
 	int opcion = 0, codigo = 0;
 	int maxGerentes = 2; 
@@ -34,7 +35,8 @@ int main(){
 					case 1:
 						{
 							//Se revisa si ya se llego al límete de empleados
-							if(maxEmpleados > Empleado::noEmpleados && maxGerentes > Gerente::noGerentes){
+							if(maxEmpleados > Empleado::noEmpleados){
+								
 								char nombre[30];
 								int telefono;
 								char direccion[40];
@@ -62,19 +64,24 @@ int main(){
 								}
 								
 								//Para agregar un Gerente
-								if(opcion == 1){
+								if(opcion == 1 && maxGerentes > Gerente::noGerentes){
 									empleados[ID] = new Gerente(nombre,telefono,direccion,RFC,ID);
 									Gerente::aumentarGerentes();
 								}
+								////////Falta agregar los de servicio y administradores
+								
+								//En dado caso que ya estpe el límite de empleados de un tipo, se informa el número actual
+								if(opcion == 1 && Gerente::noGerentes >= maxGerentes) {
+									cout<<"-Numero maximo de gerentes: "<<maxGerentes<<"\tActualmente: "<<Gerente::noGerentes<<endl;
+								}
+								empleados[ID]->reportar();
+								empleados[ID]->reportarPorTipo();
 								Empleado::agregarEmpleado();
-								cout<<"Se a creado satisfactoriamente el nuevo registro."<<endl;
+								cout<<"Se a creado satisfactoriamente el nuevo registro."<<endl<<"ID: "<<ID<<endl;
 							}else {
 								//Este caso es en dado caso que alguna de las condiciones de limite de empleado se presente
 								if(maxEmpleados <= Empleado::noEmpleados){
 									cout<<"-Numero maximo de empleados: "<<maxEmpleados<<"\tActualmente: "<<Gerente::noEmpleados<<endl;
-								}
-								if(maxGerentes <= Gerente::noGerentes){
-									cout<<"-Numero maximo de gerentes: "<<maxGerentes<<"\tActualmente: "<<Gerente::noGerentes<<endl;
 								}
 							}
 						}
@@ -106,19 +113,23 @@ int main(){
 					
 					case 3:
 						{
-							int id = 0;
-							cout<<"Ingresa el codigo del registro a eliminar: ";
-							cin>>id;
-							if(empleados[id] != NULL){
-								delete empleados[id];
-								empleados[id] = NULL;
-								Gerente::disminuirGerentes();
-								cout<<"El registro se ha eliminado correctamente."<<endl;
+							if(Empleado::noEmpleados != 0){
+								int id = 0;
+								cout<<"Ingresa el codigo del registro a eliminar: ";
+								cin>>id;
+								if(empleados[id] != NULL){
+									delete empleados[id];
+									empleados[id] = NULL;
+									Gerente::disminuirGerentes();
+									cout<<"El registro se ha eliminado correctamente."<<endl;
+								}else {
+									cout<<"El ID ingresado no está registrado a un empleado."<<endl;
+								}
+								system("PAUSE");
+								system("cls");			
 							}else {
-								cout<<"El ID ingresado no está registrado a un empleado."<<endl;
+								cout<<"No se tienen registros de empleados."<<endl;
 							}
-							system("PAUSE");
-							system("cls");
 						}
 					break;			
 				}
@@ -131,7 +142,7 @@ int main(){
 				switch(opcion){
 					case 1:
 					{
-						if(maxClientes > Cliente::numeroClientes){
+						if(maxClientes > Cliente::noClientes){
 							char email[40];
 							char nombre[30];
 							int telefono;
@@ -148,9 +159,16 @@ int main(){
 							cin>>RFC;
 							cout<<"Email: ";
 							cin>>email;
-							ID = Cliente::numeroClientes;
-							clientes[Cliente::numeroClientes] = new Cliente(email, nombre, telefono, direccion, RFC, ID);
+							for(int i = 0; i < maxClientes; i++){
+									if(clientes[i] == NULL){
+										ID = i;
+										break;
+									}
+								}
+							clientes[ID] = new Cliente(email, nombre, telefono, direccion, RFC, ID);
+							clientes[ID]->reportar();
 							Cliente::aumentarClientes();
+							cout<<"Se a creado satisfactoriamente el nuevo registro."<<endl<<"ID: "<<ID<<endl;
 						}
 						system("PAUSE");
 						system("cls");
@@ -181,7 +199,7 @@ int main(){
 					
 					case 3:
 					{
-						if(Cliente::numeroClientes != 0){
+						if(Cliente::noClientes != 0){
 							int id;
 							cout<<"Dime el codigo del registro a eliminar: ";
 							cin>>id;

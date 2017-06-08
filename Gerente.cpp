@@ -5,7 +5,6 @@ class Gerente: public Empleado{
 		static int noGerentes;
 		Gerente(){};
 		Gerente(char _nombre[30], int _telefono, char _direccion[40], char _RFC[20], int _ID);
-		int vender(int);
 		static void aumentarGerentes(){Gerente::noGerentes++;};
 		static void disminuirGerentes(){Gerente::noGerentes--;};
 };
@@ -16,6 +15,3 @@ Gerente::Gerente(char _nombre[30], int _telefono, char _direccion[40], char _RFC
 	
 }
 
-int Gerente::vender(int codigo){
-	return 1;
-}
