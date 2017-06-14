@@ -16,6 +16,7 @@ int main(){
 	remove("Reportes/Empleados/Gerentes.txt");
 	remove("Reportes/Empleados/Administradores.txt");
 	remove("Reportes/Empleados/EmpleadosDeServicio.txt");
+	remove("Reportes/Clientes.txt");
 	
 	//codigo = codigo de empleado
 	int opcion = 0, codigo = 0;
@@ -320,6 +321,13 @@ int main(){
 							if(clientes[id] != NULL){
 								delete clientes[id];
 								clientes[id] = NULL;
+								fescritura.open("Reportes/Clientes.txt");
+								for(int i = 0; i < maxClientes; i++){
+									if(clientes[i]!=NULL){
+										clientes[i]->reportar(fescritura);
+									}
+								}
+								fescritura.close();
 								cout<<"El registro se ha eliminado correctamente."<<endl;
 								Cliente::disminuirClientes();
 							}
@@ -356,10 +364,8 @@ int main(){
 							else if(verNoPersonas(habitaciones[noHabitacion]) == 5){
 								HabitacionDeLujo::disminuirHabitacionesDeLujoRentadas();
 							}
-							remove("Reportes/Habitaciones/HabitacionesDisponibles.txt");							
-							remove("Reportes/Habitaciones/HabitacionesNoDisponibles.txt");
-							ofstream fescritura("Reportes/Habitaciones/HabitacionesDisponibles.txt", ios::app);
-							ofstream fescritura2("Reportes/Habitaciones/HabitacionesNoDisponibles.txt", ios::app);
+							fescritura.open("Reportes/Habitaciones/HabitacionesDisponibles.txt");
+							fescritura2.open("Reportes/Habitaciones/HabitacionesNoDisponibles.txt");
 							for(int i = 0; i < noHabitaciones; i++){
 								if(habitaciones[i]->disponible() == true){
 									habitaciones[i]->reportar(fescritura);
@@ -439,11 +445,21 @@ int main(){
 								float comision = 0;
 								comision = habitaciones[noHabitacion]->getPrecio() * .05 * dias;
 								(*(empleados[codigo])).vender(comision);
+								remove("Reportes/Empleados/Administradores.txt");
+								remove("Reportes/Empleados/Gerentes.txt");
+								remove("Reportes/Empleados/EmpleadosDeServicio.txt");
+								fescritura2.open("Reportes/Empleados/Empleados.txt");
+								for(int i = 0; i < maxEmpleados; i++){
+									if(empleados[i] != NULL){
+										empleados[i]->reportar();
+										fescritura.close();
+										empleados[i]->reportar(fescritura2);
+									}
+								}
+								fescritura2.close();
 							}
-							remove("Reportes/Habitaciones/HabitacionesDisponibles.txt");							
-							remove("Reportes/Habitaciones/HabitacionesNoDisponibles.txt");
-							ofstream fescritura("Reportes/Habitaciones/HabitacionesDisponibles.txt", ios::app);
-							ofstream fescritura2("Reportes/Habitaciones/HabitacionesNoDisponibles.txt", ios::app);
+							fescritura.open("Reportes/Habitaciones/HabitacionesDisponibles.txt");
+							fescritura2.open("Reportes/Habitaciones/HabitacionesNoDisponibles.txt");
 							for(int i = 0; i < noHabitaciones; i++){
 								if(habitaciones[i]->disponible() == true){
 									habitaciones[i]->reportar(fescritura);
@@ -478,8 +494,70 @@ int main(){
 			break;
 			
 			case 5:
+				int opcion2;
 				cout<<"1. Lista de Clientes"<<endl<<"2. Lista de Habitaciones totales"<<endl<<"3. Reporte de Habitaciones disponibles"<<endl<<"4. Reporte de Habitaciones NO disponibles."<<endl
 				<<"5. Lista de Empleados"<<endl<<"6. Lista de Empleados de acuerdo a tipos."<<endl;
+				cin>>opcion2;
+				ifstream flectura;
+				switch(opcion2){
+					case 1:
+						{
+							flectura.open("Reportes/Clientes.txt");
+						}
+					break;
+					
+					case 2:
+						{
+							flectura.open("Reportes/Habitaciones/Habitaciones.txt");
+						}
+					break;
+					
+					
+					case 3:
+						{
+							flectura.open("Reportes/Habitaciones/HabitacionesDisponibles.txt");
+						}
+					break;
+					
+					
+					case 4:
+						{
+							flectura.open("Reportes/Habitaciones/HabitacionesNoDisponibles.txt");
+						}
+					break;
+					
+					
+					case 5:
+						{
+							flectura.open("Reportes/Empleados/Empleados.txt");
+						}
+					break;
+					
+					
+					case 6:
+						{
+							char car;
+							flectura.open("Reportes/Empleados/Gerentes.txt");
+							while(flectura.get(car)){
+							cout<<car;
+							}
+							flectura.close();
+							flectura.open("Reportes/Empleados/Administradores.txt");
+							while(flectura.get(car)){
+							cout<<car;
+							}
+							flectura.close();
+							flectura.open("Reportes/Empleados/EmpleadosDeServicio.txt");
+						}
+					break;
+				}
+				char car;
+				while(flectura.get(car)){
+					cout<<car;
+				}
+				flectura.close();
+				system("pause");
+				system("cls");
 			break;
 		}
 	}while(opcion != 6);

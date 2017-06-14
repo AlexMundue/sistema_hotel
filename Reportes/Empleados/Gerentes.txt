@@ -1,8 +1,8 @@
 Gerente
-Nombre: 1
-Telefono: 1
-Dirección: 1
-RFC: 1
-ID: 2
-Sueldo: 25000
+Nombre: Oscar Ramirez
+Telefono: 3326567894
+Dirección: Federalismo 433
+RFC: MEJD9898JCC
+ID: 0
+Sueldo: $25000
 

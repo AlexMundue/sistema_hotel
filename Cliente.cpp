@@ -1,7 +1,7 @@
 #include "Persona.cpp"
 #include <fstream>
 class Cliente: public Persona {
-	const char *ubicacionReporte = "Reportes/Empleados/Gerentes.txt";
+	const char *ubicacionReporte = "Reportes/Clientes.txt";
 	char	email[40];
 	bool	rentando;
 	int noHabitacion;
@@ -15,7 +15,6 @@ class Cliente: public Persona {
 		void desocupar();
 		void reportar();
 		bool estaRentando(){return rentando;};
-		char* getUbicacionReporte();
 };
 
 int Cliente::noClientes = 0;
@@ -49,8 +48,3 @@ void Cliente::reportar(){
 	}
 }
 
-char* Cliente::getUbicacionReporte(){
-	char* ubicacion;
-	strcpy(ubicacion,ubicacionReporte);
-	return ubicacion;
-}

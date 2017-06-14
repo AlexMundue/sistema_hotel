@@ -1,0 +1,8 @@
+Administrador
+Nombre: Carlos Salas
+Telefono: 3379854613
+Dirección: Juan de la barranca 847
+RFC: JDJD7895LNN
+ID: 1
+Sueldo: $8750
+

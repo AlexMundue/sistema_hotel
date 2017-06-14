@@ -12,7 +12,6 @@ class Administrador: public Empleado{
 		static void disminuirAdministradores(){Administrador::noAdministradores--;};
 		void reportar();
 		void vender(float);
-		char* getUbicacionReporte();
 };
 
 int Administrador::noAdministradores = 0;
@@ -33,8 +32,3 @@ void Administrador::reportar(){
 	fescritura.close();
 }
 
-char* Administrador::getUbicacionReporte(){
-	char* ubicacion;
-	strcpy(ubicacion,ubicacionReporte);
-	return ubicacion;
-}

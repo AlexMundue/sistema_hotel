@@ -10,7 +10,6 @@ class EmpleadoDeServicio: public Empleado{
 		static void aumentarEmpleadosDeServicio(){EmpleadoDeServicio::noEmpleadosDeServicio++;};
 		static void disminuirEmpleadosDeServicio(){EmpleadoDeServicio::noEmpleadosDeServicio--;};
 		void reportar();
-		char* getUbicacionReporte();
 };
 
 int EmpleadoDeServicio::noEmpleadosDeServicio = 0;
@@ -25,8 +24,4 @@ void EmpleadoDeServicio::reportar(){
 	fescritura.close();
 }
 
-char* EmpleadoDeServicio::getUbicacionReporte(){
-	char* ubicacion;
-	strcpy(ubicacion,ubicacionReporte);
-	return ubicacion;
-}
+
