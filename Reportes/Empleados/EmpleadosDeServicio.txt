@@ -16,3 +16,9 @@ Dirección: 3
 RFC: 3
 ID: 2
 
+Nombre: 1
+Telefono: 1
+Dirección: 1
+RFC: 1
+ID: 3
+

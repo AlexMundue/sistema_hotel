@@ -12,7 +12,7 @@ class Empleado: public Persona {
 	public: 
 		Empleado(){};
 		~Empleado(){};
-		Empleado(int _sueldo, char* _puesto, char _nombre[30], int _telefono, char _direccion[40], char _RFC[20], int _ID);
+		Empleado(int _sueldo, char* _puesto, char _nombre[], char _telefono[], char _direccion[], char _RFC[], int _ID);
 		void mostrar() const;	
 		static int noEmpleados;
 		static void agregarEmpleado(){Empleado::noEmpleados++;};
@@ -23,7 +23,7 @@ class Empleado: public Persona {
 
 int Empleado::noEmpleados = 0;
 
-Empleado::Empleado(int _sueldo, char* _puesto, char _nombre[30], int _telefono, char _direccion[40], char _RFC[20], int _ID): Persona(_nombre, _telefono, _direccion, _RFC, _ID){
+Empleado::Empleado(int _sueldo, char* _puesto, char _nombre[], char _telefono[], char _direccion[], char _RFC[], int _ID): Persona(_nombre, _telefono, _direccion, _RFC, _ID){
 	sueldo = _sueldo;
 	strcpy(puesto,_puesto);
 }

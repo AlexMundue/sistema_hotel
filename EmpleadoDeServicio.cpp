@@ -3,7 +3,7 @@ class EmpleadoDeServicio: public Empleado{
 	public: 
 		static int noEmpleadosDeServicio;
 		EmpleadoDeServicio(){};
-		EmpleadoDeServicio(char _nombre[30], int _telefono, char _direccion[40], char _RFC[20], int _ID);
+		EmpleadoDeServicio(char _nombre[], char _telefono[], char _direccion[], char _RFC[], int _ID);
 		~EmpleadoDeServicio(){};
 		static void aumentarEmpleadosDeServicio(){EmpleadoDeServicio::noEmpleadosDeServicio++;};
 		static void disminuirEmpleadosDeServicio(){EmpleadoDeServicio::noEmpleadosDeServicio--;};
@@ -12,7 +12,7 @@ class EmpleadoDeServicio: public Empleado{
 
 int EmpleadoDeServicio::noEmpleadosDeServicio = 0;
 
-EmpleadoDeServicio::EmpleadoDeServicio(char _nombre[30], int _telefono, char _direccion[40], char _RFC[20], int _ID): Empleado(6000, "Empleado de servicio", _nombre, _telefono, _direccion, _RFC, _ID){
+EmpleadoDeServicio::EmpleadoDeServicio(char _nombre[], char _telefono[], char _direccion[], char _RFC[], int _ID): Empleado(6000, "Empleado de servicio", _nombre, _telefono, _direccion, _RFC, _ID){
 	
 }
 

@@ -1,4 +1,3 @@
-
 class Habitacion{
 	bool estatus;
 	float precio;
@@ -6,10 +5,16 @@ class Habitacion{
 	int noPersonas;
 	Persona* clienteHospedado;
 	public:
-		static int habitacionesDisponibles;
-		void aumentarContador(Habitacion::habitacionesDisponibles++;);
-		void disminuir(){Habitacion::habitacionesDisponibles--;};
-
+		Habitacion(){};
+		~Habitacion(){delete clienteHospedado;};
+		Habitacion(float,int,int);
+		static int noHabitacionesRentadas;
+		static void aumentarHabitacionesRentadas();
+		static void disminuirHabitacionesRentadas();
+		void rentar(Persona*);
+		void desocupar();
+		bool disponible(){return estatus;};
+		int getPrecio(){return precio;};
+		friend int verNoPersonas(Habitacion* habitacion);
+	
 };
-
-

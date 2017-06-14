@@ -5,7 +5,7 @@ class Administrador: public Empleado{
 		static int noAdministradores;
 		Administrador(){};
 		~Administrador(){};
-		Administrador(char _nombre[30], int _telefono, char _direccion[40], char _RFC[20], int _ID);
+		Administrador(char _nombre[], char _telefono[], char _direccion[], char _RFC[], int _ID);
 		static void aumentarAdministradores(){Administrador::noAdministradores++;};
 		static void disminuirAdministradores(){Administrador::noAdministradores--;};
 		void reportarPorTipo();
@@ -14,13 +14,13 @@ class Administrador: public Empleado{
 
 int Administrador::noAdministradores = 0;
 
-Administrador::Administrador(char _nombre[30], int _telefono, char _direccion[40], char _RFC[20], int _ID): Empleado(8000, "Administrador", _nombre, _telefono, _direccion, _RFC, _ID){
+Administrador::Administrador(char _nombre[], char _telefono[], char _direccion[], char _RFC[], int _ID): Empleado(8000, "Administrador", _nombre, _telefono, _direccion, _RFC, _ID){
 	
 }
 
 void Administrador::vender(float comision){
 	bonos+=comision;
-	Empleado::aumentarSueldo(bonos);
+	Empleado::aumentarSueldo(comision);
 }
 
 void Administrador::reportarPorTipo(){
