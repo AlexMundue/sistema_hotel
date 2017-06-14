@@ -1,3 +1,5 @@
+#ifndef EMPLEADO_H
+#define EMPLEADO_H
 #include "Persona.cpp"
 #include <string.h>
 #include <fstream>
@@ -9,12 +11,14 @@ class Empleado: public Persona {
 	float sueldo;
 	public: 
 		Empleado(){};
+		~Empleado(){};
 		Empleado(int _sueldo, char* _puesto, char _nombre[30], int _telefono, char _direccion[40], char _RFC[20], int _ID);
 		void mostrar() const;	
 		static int noEmpleados;
 		static void agregarEmpleado(){Empleado::noEmpleados++;};
 		void reportar();
-		void reportarPorTipo();	
+		void reportarPorTipo(ofstream&);	
+		void aumentarSueldo(float);
 };
 
 int Empleado::noEmpleados = 0;
@@ -36,15 +40,15 @@ void Empleado::reportar(){
 		"Telefono: "<<getTelefono()<<endl<<
 		"Dirección: "<<getDireccion()<<endl<<
 		"RFC: "<<getRFC()<<endl<<
-		"ID: "<<getID()<<endl<<endl;
+		"ID: "<<getID()<<endl<<
+		"Sueldo: "<<sueldo<<endl<<endl;
 		fescritura.close();
 	} else{
-		cout<<"error Empleados.txt";
+		cout<<"Error Empleados.txt";
 	}
 }
 
-void Empleado::reportarPorTipo(){
-	ofstream fescritura("Reportes/Gerentes.txt", ios::app);
+void Empleado::reportarPorTipo(ofstream &fescritura){
 	if(fescritura){
 		fescritura<<"Nombre: "<<getNombre()<<endl<<
 		"Telefono: "<<getTelefono()<<endl<<
@@ -53,6 +57,12 @@ void Empleado::reportarPorTipo(){
 		"ID: "<<getID()<<endl<<endl;
 		fescritura.close();
 	} else{
-		cout<<"error Gerentes.txt"<<endl;
+		cout<<"Error "<<puesto<<endl;
 	}
 }
+
+void Empleado::aumentarSueldo(float bonos){
+	sueldo+=bonos;
+}
+
+#endif

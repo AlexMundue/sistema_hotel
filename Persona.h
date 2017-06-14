@@ -6,6 +6,7 @@ class Persona{
 	int ID;
 	public:
 		Persona(){};
+		~Persona(){};
 		Persona(char _nombre[30], int _telefono, char _direccion[40], char _RFC[20], int _ID);
 		virtual void mostrar() const;
 		char* getNombre(){return nombre;};

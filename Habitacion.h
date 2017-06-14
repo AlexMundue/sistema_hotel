@@ -4,8 +4,11 @@ class Habitacion{
 	float precio;
 	int ID;
 	int noPersonas;
-	static int habitacionesDisponibles;
 	Persona* clienteHospedado;
+	public:
+		static int habitacionesDisponibles;
+		void aumentarContador(Habitacion::habitacionesDisponibles++;);
+		void disminuir(){Habitacion::habitacionesDisponibles--;};
 
 };
 

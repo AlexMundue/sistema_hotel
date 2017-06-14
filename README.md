@@ -1,1 +1,1 @@
-"# sistema_hotel" 
+Sitema de hotel para ayudar a un pequeño hotel con el conteo de sus clientes y empleados, el programa también cuenta con la creación de reportes de los empleados, clientes y sus habitaciones.

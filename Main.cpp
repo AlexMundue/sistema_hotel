@@ -1,7 +1,10 @@
 #include <iostream>
 #include "Cliente.cpp"
 #include "Gerente.cpp"
+#include "Administrador.cpp"
+#include "EmpleadoDeServicio.cpp"
 #include <string.h>
+#include <typeinfo>
 
 using namespace std;
 
@@ -9,6 +12,8 @@ int main(){
 	
 	//codigo = codigo de empleado
 	int opcion = 0, codigo = 0;
+	int maxAdministradores = 3;
+	int maxEmpleadosDeServicio = 5;
 	int maxGerentes = 2; 
 	int maxEmpleados = 10;
 	int maxClientes = 10;
@@ -36,7 +41,7 @@ int main(){
 						{
 							//Se revisa si ya se llego al límete de empleados
 							if(maxEmpleados > Empleado::noEmpleados){
-								
+
 								char nombre[30];
 								int telefono;
 								char direccion[40];
@@ -68,11 +73,24 @@ int main(){
 									empleados[ID] = new Gerente(nombre,telefono,direccion,RFC,ID);
 									Gerente::aumentarGerentes();
 								}
-								////////Falta agregar los de servicio y administradores
+								//Para agregar un Administrador
+								else if(opcion == 2 && maxAdministradores > Administrador::noAdministradores){
+									empleados[ID] = new Administrador(nombre,telefono,direccion,RFC,ID);
+									Administrador::aumentarAdministradores();
+								}
+								//Para agregar un empleado de servicio
+								else if(opcion == 3 && maxEmpleadosDeServicio > EmpleadoDeServicio::noEmpleadosDeServicio){
+									empleados[ID] = new EmpleadoDeServicio(nombre,telefono,direccion,RFC,ID);
+									EmpleadoDeServicio::aumentarEmpleadosDeServicio();
+								}
 								
-								//En dado caso que ya estpe el límite de empleados de un tipo, se informa el número actual
+								//En dado caso que ya esté el límite de empleados de un tipo, se informa el número actual
 								if(opcion == 1 && Gerente::noGerentes >= maxGerentes) {
 									cout<<"-Numero maximo de gerentes: "<<maxGerentes<<"\tActualmente: "<<Gerente::noGerentes<<endl;
+								}else if(opcion == 2 && Administrador::noAdministradores >= maxAdministradores) {
+									cout<<"-Numero maximo de Administradores: "<<maxAdministradores<<"\tActualmente: "<<Administrador::noAdministradores<<endl;
+								}else if(opcion == 3 && EmpleadoDeServicio::noEmpleadosDeServicio >= maxEmpleadosDeServicio) {
+									cout<<"-Numero maximo de empleados de servicio: "<<maxEmpleadosDeServicio<<"\tActualmente: "<<EmpleadoDeServicio::noEmpleadosDeServicio<<endl;
 								}
 								empleados[ID]->reportar();
 								empleados[ID]->reportarPorTipo();
@@ -80,9 +98,7 @@ int main(){
 								cout<<"Se a creado satisfactoriamente el nuevo registro."<<endl<<"ID: "<<ID<<endl;
 							}else {
 								//Este caso es en dado caso que alguna de las condiciones de limite de empleado se presente
-								if(maxEmpleados <= Empleado::noEmpleados){
 									cout<<"-Numero maximo de empleados: "<<maxEmpleados<<"\tActualmente: "<<Gerente::noEmpleados<<endl;
-								}
 							}
 						}
 						system("PAUSE");
@@ -118,10 +134,22 @@ int main(){
 								cout<<"Ingresa el codigo del registro a eliminar: ";
 								cin>>id;
 								if(empleados[id] != NULL){
+									//Se compara que tipo de empleado se eliminó, para así disminuir el contador de ese tipo de empleado y así continuar teniendo el conteo
+									if(typeid(Gerente) == typeid(*(empleados[id]))){
+										Gerente::disminuirGerentes();
+										cout<<"Gerentes: "<<Gerente::noGerentes;
+									}
+									else if(typeid(Administrador) == typeid(*(empleados[id]))){
+										Administrador::disminuirAdministradores();
+										cout<<"Administradores: "<<Administrador::noAdministradores;
+									}
+									else if(typeid(EmpleadoDeServicio) == typeid(*(empleados[id]))){
+										EmpleadoDeServicio::disminuirEmpleadosDeServicio();
+										cout<<"EmpleadoDeServicio: "<<EmpleadoDeServicio::noEmpleadosDeServicio;
+									}
 									delete empleados[id];
 									empleados[id] = NULL;
-									Gerente::disminuirGerentes();
-									cout<<"El registro se ha eliminado correctamente."<<endl;
+									cout<<"\nEl registro se ha eliminado correctamente."<<endl;
 								}else {
 									cout<<"El ID ingresado no está registrado a un empleado."<<endl;
 								}
