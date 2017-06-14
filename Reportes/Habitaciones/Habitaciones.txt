@@ -1,0 +1,60 @@
+Habitacion doble
+ID: 0
+Estatus: 1
+Precio: 800
+Número de personas: 2
+
+Habitacion doble
+ID: 1
+Estatus: 1
+Precio: 800
+Número de personas: 2
+
+Habitacion doble
+ID: 2
+Estatus: 1
+Precio: 800
+Número de personas: 2
+
+Habitacion doble
+ID: 3
+Estatus: 1
+Precio: 800
+Número de personas: 2
+
+Habitacion doble
+ID: 4
+Estatus: 1
+Precio: 800
+Número de personas: 2
+
+Habitacion cuadruple
+ID: 5
+Estatus: 1
+Precio: 1100
+Número de personas: 4
+
+Habitacion cuadruple
+ID: 6
+Estatus: 1
+Precio: 1100
+Número de personas: 4
+
+Habitacion cuadruple
+ID: 7
+Estatus: 1
+Precio: 1100
+Número de personas: 4
+
+Habitacion de lujo
+ID: 8
+Estatus: 1
+Precio: 1500
+Número de personas: 5
+
+Habitacion de lujo
+ID: 9
+Estatus: 1
+Precio: 1500
+Número de personas: 5
+

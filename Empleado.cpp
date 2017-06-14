@@ -16,8 +16,7 @@ class Empleado: public Persona {
 		void mostrar() const;	
 		static int noEmpleados;
 		static void agregarEmpleado(){Empleado::noEmpleados++;};
-		void reportar();
-		void reportarPorTipo(ofstream&);	
+		void reportar(ofstream&);	
 		void aumentarSueldo(float);
 };
 
@@ -33,8 +32,7 @@ void Empleado::mostrar() const{
 	cout<<"Sueldo: "<<sueldo<<endl;
 }
 
-void Empleado::reportar(){
-	ofstream fescritura("Reportes/Empleados.txt", ios::app);
+void Empleado::reportar(ofstream& fescritura){
 	if(fescritura){
 		fescritura<<puesto<<endl<<"Nombre: "<<getNombre()<<endl<<
 		"Telefono: "<<getTelefono()<<endl<<
@@ -42,22 +40,8 @@ void Empleado::reportar(){
 		"RFC: "<<getRFC()<<endl<<
 		"ID: "<<getID()<<endl<<
 		"Sueldo: "<<sueldo<<endl<<endl;
-		fescritura.close();
 	} else{
-		cout<<"Error Empleados.txt";
-	}
-}
-
-void Empleado::reportarPorTipo(ofstream &fescritura){
-	if(fescritura){
-		fescritura<<"Nombre: "<<getNombre()<<endl<<
-		"Telefono: "<<getTelefono()<<endl<<
-		"Dirección: "<<getDireccion()<<endl<<
-		"RFC: "<<getRFC()<<endl<<
-		"ID: "<<getID()<<endl<<endl;
-		fescritura.close();
-	} else{
-		cout<<"Error "<<puesto<<endl;
+		cout<<"Error";
 	}
 }
 

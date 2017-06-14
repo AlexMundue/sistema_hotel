@@ -1,6 +1,8 @@
 #include "Empleado.cpp"
+#include <fstream>
 class Administrador: public Empleado{
 	float bonos;
+	const char *ubicacionReporte = "Reportes/Empleados/Administradores.txt";
 	public: 
 		static int noAdministradores;
 		Administrador(){};
@@ -8,8 +10,9 @@ class Administrador: public Empleado{
 		Administrador(char _nombre[], char _telefono[], char _direccion[], char _RFC[], int _ID);
 		static void aumentarAdministradores(){Administrador::noAdministradores++;};
 		static void disminuirAdministradores(){Administrador::noAdministradores--;};
-		void reportarPorTipo();
+		void reportar();
 		void vender(float);
+		char* getUbicacionReporte();
 };
 
 int Administrador::noAdministradores = 0;
@@ -23,7 +26,15 @@ void Administrador::vender(float comision){
 	Empleado::aumentarSueldo(comision);
 }
 
-void Administrador::reportarPorTipo(){
-	ofstream fescritura("Reportes/Empleados/Administradores.txt", ios::app);
-	Empleado::reportarPorTipo(fescritura);
+
+void Administrador::reportar(){
+	ofstream fescritura(ubicacionReporte, ios::app);
+	Empleado::reportar(fescritura);
+	fescritura.close();
+}
+
+char* Administrador::getUbicacionReporte(){
+	char* ubicacion;
+	strcpy(ubicacion,ubicacionReporte);
+	return ubicacion;
 }

@@ -1,3 +1,6 @@
+#include <fstream>
+#include <string.h>
+
 class Persona{
 	char nombre[30];
 	char telefono[20];
@@ -14,8 +17,8 @@ class Persona{
 		char* getDireccion(){return direccion;};
 		char* getRFC(){return RFC;};
 		int getID(){return ID;};
+		virtual void reportar(std::ofstream&){};
 		virtual void reportar(){};
-		virtual void reportarPorTipo(){};
 		virtual void vender(float){};
 		virtual bool estaRentando(){};
 		virtual void rentar(int){};

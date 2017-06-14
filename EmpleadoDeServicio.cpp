@@ -1,5 +1,7 @@
 #include "Empleado.cpp"
+#include <fstream>
 class EmpleadoDeServicio: public Empleado{
+	const char *ubicacionReporte = "Reportes/Empleados/EmpleadosDeServicio.txt";
 	public: 
 		static int noEmpleadosDeServicio;
 		EmpleadoDeServicio(){};
@@ -7,7 +9,8 @@ class EmpleadoDeServicio: public Empleado{
 		~EmpleadoDeServicio(){};
 		static void aumentarEmpleadosDeServicio(){EmpleadoDeServicio::noEmpleadosDeServicio++;};
 		static void disminuirEmpleadosDeServicio(){EmpleadoDeServicio::noEmpleadosDeServicio--;};
-		void reportarPorTipo();
+		void reportar();
+		char* getUbicacionReporte();
 };
 
 int EmpleadoDeServicio::noEmpleadosDeServicio = 0;
@@ -16,7 +19,14 @@ EmpleadoDeServicio::EmpleadoDeServicio(char _nombre[], char _telefono[], char _d
 	
 }
 
-void EmpleadoDeServicio::reportarPorTipo(){
-	ofstream fescritura("Reportes/Empleados/EmpleadosDeServicio.txt", ios::app);
-	Empleado::reportarPorTipo(fescritura);
+void EmpleadoDeServicio::reportar(){
+	ofstream fescritura(ubicacionReporte, ios::app);
+	Empleado::reportar(fescritura);
+	fescritura.close();
+}
+
+char* EmpleadoDeServicio::getUbicacionReporte(){
+	char* ubicacion;
+	strcpy(ubicacion,ubicacionReporte);
+	return ubicacion;
 }

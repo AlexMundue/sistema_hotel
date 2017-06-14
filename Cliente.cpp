@@ -1,6 +1,7 @@
 #include "Persona.cpp"
 #include <fstream>
 class Cliente: public Persona {
+	const char *ubicacionReporte = "Reportes/Empleados/Gerentes.txt";
 	char	email[40];
 	bool	rentando;
 	int noHabitacion;
@@ -14,6 +15,7 @@ class Cliente: public Persona {
 		void desocupar();
 		void reportar();
 		bool estaRentando(){return rentando;};
+		char* getUbicacionReporte();
 };
 
 int Cliente::noClientes = 0;
@@ -35,7 +37,7 @@ void Cliente::desocupar(){
 }
 
 void Cliente::reportar(){
-	ofstream fescritura("Reportes/Clientes.txt", ios::app);
+	ofstream fescritura(ubicacionReporte, ios::app);
 	if(fescritura){
 		fescritura<<"Nombre: "<<getNombre()<<endl<<
 		"Telefono: "<<getTelefono()<<endl<<
@@ -43,6 +45,12 @@ void Cliente::reportar(){
 		"RFC: "<<getRFC()<<endl<<
 		"ID: "<<getID()<<endl<<endl;
 	} else{
-		cout<<"error Clientes.txt";
+		cout<<"error "<<ubicacionReporte;
 	}
+}
+
+char* Cliente::getUbicacionReporte(){
+	char* ubicacion;
+	strcpy(ubicacion,ubicacionReporte);
+	return ubicacion;
 }

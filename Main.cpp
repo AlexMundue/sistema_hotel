@@ -12,6 +12,10 @@
 using namespace std;
 
 int main(){
+	remove("Reportes/Empleados/Empleados.txt");
+	remove("Reportes/Empleados/Gerentes.txt");
+	remove("Reportes/Empleados/Administradores.txt");
+	remove("Reportes/Empleados/EmpleadosDeServicio.txt");
 	
 	//codigo = codigo de empleado
 	int opcion = 0, codigo = 0;
@@ -25,15 +29,23 @@ int main(){
 	for(int i = 0; i < maxEmpleados; i++){
 		empleados[i] = NULL;
 	}
+	ofstream fescritura("Reportes/Empleados/Empleados.txt", ios::app);
 	empleados[0] = new Gerente("Oscar Ramirez", "3326567894","Federalismo 433", "MEJD9898JCC",0);
 	Empleado::agregarEmpleado();
 	Gerente::aumentarGerentes();
+	empleados[0]->reportar();
+	empleados[0]->reportar(fescritura);
 	empleados[1] = new Administrador("Carlos Salas", "3379854613","Juan de la barranca 847", "JDJD7895LNN",1);
 	Empleado::agregarEmpleado();
 	Administrador::aumentarAdministradores();
+	empleados[1]->reportar();
+	empleados[1]->reportar(fescritura);
 	empleados[2] = new EmpleadoDeServicio("Juan Antonio Salamanca", "3311875244","Juarez 222", "AHKJ1717JXX",2);
 	Empleado::agregarEmpleado();
 	EmpleadoDeServicio::aumentarEmpleadosDeServicio();
+	empleados[2]->reportar();
+	empleados[2]->reportar(fescritura);
+	fescritura.close();
 	Persona* clientes[maxClientes];
 	for(int i = 0; i < maxClientes; i++){
 		clientes[i] = NULL;
@@ -57,6 +69,16 @@ int main(){
 	int noHabitacionesDobles = 5;
 	int noHabitacionesCuadruples = 3;
 	int noHabitacionesDeLujo = 2;
+	remove("Reportes/Habitaciones/Habitaciones.txt");
+	remove("Reportes/Habitaciones/HabitacionesDisponibles.txt");
+	fescritura.open("Reportes/Habitaciones/Habitaciones.txt", ios::app);
+	ofstream fescritura2("Reportes/Habitaciones/HabitacionesDisponibles.txt", ios::app);
+	for(int i = 0; i < noHabitaciones; i++){
+		habitaciones[i]->reportar(fescritura);
+		habitaciones[i]->reportar(fescritura2);
+	}
+	fescritura.close();
+	fescritura2.close();
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	int verNoPersonas(Habitacion*);
@@ -119,6 +141,13 @@ int main(){
 									EmpleadoDeServicio::aumentarEmpleadosDeServicio();
 								}
 								
+								fescritura.open("Reportes/Empleados/Empleados.txt", ios::app);
+								empleados[ID]->reportar();
+								empleados[ID]->reportar(fescritura);
+								fescritura.close();
+								Empleado::agregarEmpleado();
+								cout<<"Se a creado satisfactoriamente el nuevo registro."<<endl<<"ID: "<<ID<<endl;
+								
 								//En dado caso que ya esté el límite de empleados de un tipo, se informa el número actual
 								if(opcion == 1 && Gerente::noGerentes >= maxGerentes) {
 									cout<<"-Numero maximo de gerentes: "<<maxGerentes<<"\tActualmente: "<<Gerente::noGerentes<<endl;
@@ -127,10 +156,7 @@ int main(){
 								}else if(opcion == 3 && EmpleadoDeServicio::noEmpleadosDeServicio >= maxEmpleadosDeServicio) {
 									cout<<"-Numero maximo de empleados de servicio: "<<maxEmpleadosDeServicio<<"\tActualmente: "<<EmpleadoDeServicio::noEmpleadosDeServicio<<endl;
 								}
-								empleados[ID]->reportar();
-								empleados[ID]->reportarPorTipo();
-								Empleado::agregarEmpleado();
-								cout<<"Se a creado satisfactoriamente el nuevo registro."<<endl<<"ID: "<<ID<<endl;
+								
 							}else {
 								//Este caso es en dado caso que alguna de las condiciones de limite de empleado se presente
 									cout<<"-Numero maximo de empleados: "<<maxEmpleados<<"\tActualmente: "<<Gerente::noEmpleados<<endl;
@@ -168,22 +194,47 @@ int main(){
 								int id = 0;
 								cout<<"Ingresa el codigo del registro a eliminar: ";
 								cin>>id;
+								int tipo;
 								if(empleados[id] != NULL){
 									//Se compara que tipo de empleado se eliminó, para así disminuir el contador de ese tipo de empleado y así continuar teniendo el conteo
 									if(typeid(Gerente) == typeid(*(empleados[id]))){
 										Gerente::disminuirGerentes();
 										cout<<"Gerentes: "<<Gerente::noGerentes;
+										remove("Reportes/Empleados/Gerentes.txt");
+										tipo = 0;
 									}
 									else if(typeid(Administrador) == typeid(*(empleados[id]))){
 										Administrador::disminuirAdministradores();
 										cout<<"Administradores: "<<Administrador::noAdministradores;
+										remove("Reportes/Empleados/Administradores.txt");
+										tipo = 1;
 									}
 									else if(typeid(EmpleadoDeServicio) == typeid(*(empleados[id]))){
 										EmpleadoDeServicio::disminuirEmpleadosDeServicio();
 										cout<<"EmpleadoDeServicio: "<<EmpleadoDeServicio::noEmpleadosDeServicio;
+										remove("Reportes/Empleados/EmpleadosDeServicio.txt");
+										tipo = 2;
 									}
+								
 									delete empleados[id];
 									empleados[id] = NULL;
+									//Se actualiza la lista de los empleados en general y por tipo
+									fescritura.open("Reportes/Empleados/Empleados.txt");
+									for(int i = 0; i < maxEmpleados; i++){
+										if(empleados[i]!=NULL){
+											empleados[i]->reportar(fescritura);
+											if(typeid(Gerente) == typeid(*(empleados[i])) && tipo == 0){	
+												empleados[i]->reportar();
+											}	
+											else if(typeid(Administrador) == typeid(*(empleados[i])) && tipo == 1){
+												empleados[i]->reportar();
+											}
+											else if(typeid(EmpleadoDeServicio) == typeid(*(empleados[i])) && tipo == 2){
+												empleados[i]->reportar();
+											}
+										}
+									}
+									fescritura.close();
 									cout<<"\nEl registro se ha eliminado correctamente."<<endl;
 								}else {
 									cout<<"El ID ingresado no está registrado a un empleado."<<endl;
@@ -292,7 +343,7 @@ int main(){
 						int noHabitacion;
 						cout<<"Ingrese el ID de la habitacion a desocupar: ";
 						cin>>noHabitacion;
-						if(habitaciones[noHabitacion]->disponible() == false){
+						if(habitaciones[noHabitacion]->disponible() != true){
 							habitaciones[noHabitacion]->desocupar();
 							cout<<"Habitacion desocupada satisfactoriamente."<<endl;
 							Habitacion::disminuirHabitacionesRentadas();
@@ -305,6 +356,19 @@ int main(){
 							else if(verNoPersonas(habitaciones[noHabitacion]) == 5){
 								HabitacionDeLujo::disminuirHabitacionesDeLujoRentadas();
 							}
+							remove("Reportes/Habitaciones/HabitacionesDisponibles.txt");							
+							remove("Reportes/Habitaciones/HabitacionesNoDisponibles.txt");
+							ofstream fescritura("Reportes/Habitaciones/HabitacionesDisponibles.txt", ios::app);
+							ofstream fescritura2("Reportes/Habitaciones/HabitacionesNoDisponibles.txt", ios::app);
+							for(int i = 0; i < noHabitaciones; i++){
+								if(habitaciones[i]->disponible() == true){
+									habitaciones[i]->reportar(fescritura);
+								}else{
+									habitaciones[i]->reportar(fescritura2);
+								}
+							}
+							fescritura.close();
+							fescritura2.close();
 						}else{
 							cout<<"La habitacion esta desocupada."<<endl;
 						}
@@ -322,7 +386,7 @@ int main(){
 				cout<<"Ingresa codigo de empleado: "<<endl;
 				cin>>codigo;
 				//Checamos que el empleado exista y que existen habitaciones disponibles
-				if(empleados[codigo] != NULL && Habitacion::noHabitacionesRentadas < noHabitaciones){
+				if(empleados[codigo] != NULL && Habitacion::noHabitacionesRentadas < noHabitaciones && (Gerente::noGerentes > 0 || Administrador::noAdministradores > 0)){
 					if(typeid(*(empleados[codigo])) == typeid(Gerente) || typeid(*(empleados[codigo])) == typeid(Administrador)){
 						//Poner precios de las habitaciones
 						cout<<"1) Habitacion Doble: $"<<precioHabitacionDoble<<endl;
@@ -337,7 +401,6 @@ int main(){
 						//Ciclo para encontrar habitación disponible
 						for(int i = 0; i < noHabitaciones; i++){
 							if(opcion == 1){
-								cout<<"SI"<<endl;
 								if(verNoPersonas(habitaciones[i]) == 2 && habitaciones[i]->disponible() == true){
 									noHabitacion = i;
 									ventaHecha = true;
@@ -359,7 +422,6 @@ int main(){
 									break;
 								}
 							}
-							cout<<"NADA"<<endl;
 						}
 						
 						if(ventaHecha == true && clientes[ID] != NULL && clientes[ID]->estaRentando() != true){
@@ -378,6 +440,19 @@ int main(){
 								comision = habitaciones[noHabitacion]->getPrecio() * .05 * dias;
 								(*(empleados[codigo])).vender(comision);
 							}
+							remove("Reportes/Habitaciones/HabitacionesDisponibles.txt");							
+							remove("Reportes/Habitaciones/HabitacionesNoDisponibles.txt");
+							ofstream fescritura("Reportes/Habitaciones/HabitacionesDisponibles.txt", ios::app);
+							ofstream fescritura2("Reportes/Habitaciones/HabitacionesNoDisponibles.txt", ios::app);
+							for(int i = 0; i < noHabitaciones; i++){
+								if(habitaciones[i]->disponible() == true){
+									habitaciones[i]->reportar(fescritura);
+								}else{
+									habitaciones[i]->reportar(fescritura2);
+								}
+							}
+							fescritura.close();
+							fescritura2.close();
 						}else{
 							cout<<"Error en habitaciones disponibles o al ingresar el ID del cliente o podria ser causado porque el cliente ya esta rentando actualmente(Maximo una renta por cliente)."<<endl;
 						}
@@ -396,7 +471,7 @@ int main(){
 					cout<<"Permisos insuficientes."<<endl;
 					}
 				}else{
-					cout<<"Ese ID no existe."<<endl;
+					cout<<"Ese ID no existe o  no hay suficientes empleados con los permisos necesarios."<<endl;
 				}
 				system("pause");
 				system("cls");

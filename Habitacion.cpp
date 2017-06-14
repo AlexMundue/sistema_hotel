@@ -31,4 +31,17 @@ void Habitacion::aumentarHabitacionesRentadas(){
 void Habitacion::disminuirHabitacionesRentadas(){
 	Habitacion::noHabitacionesRentadas--;
 }
+
+void Habitacion::reportar(char tipoHabitacion[], ofstream& fescritura){
+	if(fescritura){
+		fescritura<<tipoHabitacion<<endl<<
+		"ID: "<<ID<<endl<<
+		"Estatus: "<<estatus<<endl<<
+		"Precio: "<<precio<<endl<<
+		"Número de personas: "<<noPersonas<<endl<<endl;
+	} else{
+		cout<<"Error Habitaciones.txt";
+	}
+}
+
 #endif

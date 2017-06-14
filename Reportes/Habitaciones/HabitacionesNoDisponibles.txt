@@ -1,0 +1,12 @@
+Habitacion de lujo
+ID: 8
+Estatus: 0
+Precio: 1500
+Número de personas: 5
+
+Habitacion de lujo
+ID: 9
+Estatus: 0
+Precio: 1500
+Número de personas: 5
+

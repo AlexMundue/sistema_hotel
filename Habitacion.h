@@ -16,5 +16,6 @@ class Habitacion{
 		bool disponible(){return estatus;};
 		int getPrecio(){return precio;};
 		friend int verNoPersonas(Habitacion* habitacion);
-	
+		void reportar(char*, ofstream&);
+		virtual void reportar(ofstream&){};
 };
