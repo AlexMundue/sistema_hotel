@@ -6,11 +6,3 @@ RFC: JDJD7895LNN
 ID: 1
 Sueldo: $8000
 
-Administrador
-Nombre: asd asd asd ads asd
-Telefono: adsds ad ad asd
-Dirección: adssadd adasd
-RFC: asdasd 
-ID: 4
-Sueldo: $8000
-

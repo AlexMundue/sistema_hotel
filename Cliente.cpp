@@ -45,7 +45,11 @@ void Cliente::reportar(){
 		"Telefono: "<<getTelefono()<<endl<<
 		"Dirección: "<<getDireccion()<<endl<<
 		"RFC: "<<getRFC()<<endl<<
-		"ID: "<<getID()<<endl<<endl;
+		"ID: "<<getID()<<endl;
+		if(noHabitacion != NULL){
+			fescritura<<"Número de habitación: "<<noHabitacion<<endl;
+		}
+		fescritura<<endl;
 	} else{
 		cout<<"error "<<ubicacionReporte;
 	}
