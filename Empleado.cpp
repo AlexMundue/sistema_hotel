@@ -39,7 +39,7 @@ void Empleado::reportar(ofstream& fescritura){
 		"Dirección: "<<getDireccion()<<endl<<
 		"RFC: "<<getRFC()<<endl<<
 		"ID: "<<getID()<<endl<<
-		"Sueldo: "<<sueldo<<endl<<endl;
+		"Sueldo: $"<<sueldo<<endl<<endl;
 	} else{
 		cout<<"Error";
 	}

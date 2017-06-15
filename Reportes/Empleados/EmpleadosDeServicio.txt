@@ -1,0 +1,8 @@
+Empleado de servicio
+Nombre: Juan Antonio Salamanca
+Telefono: 3311875244
+Dirección: Juarez 222
+RFC: AHKJ1717JXX
+ID: 2
+Sueldo: $6000
+

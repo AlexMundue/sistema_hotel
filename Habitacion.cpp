@@ -37,7 +37,7 @@ void Habitacion::reportar(char tipoHabitacion[], ofstream& fescritura){
 		fescritura<<tipoHabitacion<<endl<<
 		"ID: "<<ID<<endl<<
 		"Estatus: "<<estatus<<endl<<
-		"Precio: "<<precio<<endl<<
+		"Precio: $"<<precio<<endl<<
 		"Número de personas: "<<noPersonas<<endl<<endl;
 	} else{
 		cout<<"Error Habitaciones.txt";
