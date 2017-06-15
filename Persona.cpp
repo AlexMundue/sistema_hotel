@@ -4,11 +4,11 @@
 #include <string.h>
 using namespace std;
 
-Persona::Persona(char _nombre[30], int _telefono, char _direccion[40], char _RFC[20], int _ID){
-	strcpy(nombre,_nombre);
+Persona::Persona(string _nombre, string _telefono, string _direccion, string _RFC, int _ID){
+	nombre = _nombre;
 	telefono = _telefono;
-	strcpy(direccion,_direccion);
-	strcpy(RFC,_RFC);
+	direccion = _direccion;
+	RFC = _RFC;
 	ID = _ID;
 }
 

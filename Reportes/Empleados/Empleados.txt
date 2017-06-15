@@ -1,0 +1,24 @@
+Gerente
+Nombre: Oscar Ramirez
+Telefono: 3326567894
+Dirección: Federalismo 433
+RFC: MEJD9898JCC
+ID: 0
+Sueldo: $25000
+
+Administrador
+Nombre: Carlos Salas
+Telefono: 3379854613
+Dirección: Juan de la barranca 847
+RFC: JDJD7895LNN
+ID: 1
+Sueldo: $8000
+
+Empleado de servicio
+Nombre: Juan Antonio Salamanca
+Telefono: 3311875244
+Dirección: Juarez 222
+RFC: AHKJ1717JXX
+ID: 2
+Sueldo: $6000
+

@@ -1,14 +1,29 @@
+#include <fstream>
+#include <string.h>
+
+using namespace std;
 
 class Persona{
-	char nombre[30];
-	int telefono;
-	char direccion[40];
-	char RFC[20];
+	string nombre;
+	string telefono;
+	string direccion;
+	string RFC;
 	int ID;
 	public:
 		Persona(){};
-		Persona(char _nombre[30], int _telefono, char _direccion[40], char _RFC[20], int _ID);
+		~Persona(){};
+		Persona(string _nombre, string _telefono, string _direccion, string _RFC, int _ID);
 		virtual void mostrar() const;
+		string getNombre(){return nombre;};
+		string getTelefono(){return telefono;};
+		string getDireccion(){return direccion;};
+		string getRFC(){return RFC;};
+		int getID(){return ID;};
+		virtual void reportar(ofstream&){};
+		virtual void reportar(){};
+		virtual void vender(float){};
+		virtual bool estaRentando(){};
+		virtual void rentar(int){};
 };
 
 
