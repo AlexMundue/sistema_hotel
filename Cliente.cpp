@@ -1,12 +1,15 @@
 #include "Persona.cpp"
 #include <fstream>
+#include <string.h>
+using namespace std;
+
 class Cliente: public Persona {
 	const char *ubicacionReporte = "Reportes/Clientes.txt";
-	char	email[40];
+	string	email;
 	bool	rentando;
 	int noHabitacion;
 	public: 
-		Cliente(char email[], char _nombre[], char _telefono[], char _direccion[], char _RFC[], int _ID);
+		Cliente(string email, string _nombre, string _telefono, string _direccion, string _RFC, int _ID);
 		~Cliente(){};
 		void rentar(int);
 		static int noClientes;
@@ -19,9 +22,9 @@ class Cliente: public Persona {
 
 int Cliente::noClientes = 0;
 
-Cliente::Cliente(char _email[], char _nombre[], char _telefono[], char _direccion[], char _RFC[], int _ID): Persona(_nombre, _telefono, _direccion, _RFC, _ID){
-	strcpy(email, _email);
-	noHabitacion = -1;
+Cliente::Cliente(string _email, string _nombre, string _telefono, string _direccion, string _RFC, int _ID): Persona(_nombre, _telefono, _direccion, _RFC, _ID){
+	email = _email;
+	noHabitacion = NULL;
 	rentando = false;
 }
 

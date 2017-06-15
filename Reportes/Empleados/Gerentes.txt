@@ -6,3 +6,11 @@ RFC: MEJD9898JCC
 ID: 0
 Sueldo: $25000
 
+Gerente
+Nombre: asdasd
+Telefono: asd
+Dirección: asd
+RFC: ads asd asd asd
+ID: 3
+Sueldo: $25000
+

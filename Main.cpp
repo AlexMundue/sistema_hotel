@@ -99,23 +99,23 @@ int main(){
 						{
 							//Se revisa si ya se llego al límete de empleados
 							if(maxEmpleados > Empleado::noEmpleados){
-
-								char nombre[30];
-								char telefono[20];
-								char direccion[40];
-								char RFC[20];
+								string nombre;
+								string telefono;
+								string direccion;
+								string RFC;
 								int ID;
 								cout<<"1. Gerente."<<endl<<"2. Administrador."<<endl<<"3. Servicio."<<endl;
 								cin>>opcion;
 								//Se obtienene los datos del nuevo empleado
+								fflush(stdin);
 								cout<<"Nombre: ";
-								cin>>nombre;
+								getline(cin,nombre);
 								cout<<"Telefono: ";
-								cin>>telefono;
+								getline(cin,telefono);
 								cout<<"Direccion: ";
-								cin>>direccion;
+								getline(cin,direccion);
 								cout<<"RFC: ";
-								cin>>RFC;
+								getline(cin,RFC);
 								
 								//En dado caso que IDS de registros de empleados anteriores se hayan dado de baja y estén disponibles para su uso, los volvemos a reusar 
 								//para no tener memoria desperdiciada y también para saber su posición en el arreglo
@@ -258,22 +258,23 @@ int main(){
 					case 1:
 					{
 						if(maxClientes > Cliente::noClientes){
-							char email[40];
-							char nombre[30];
-							char telefono[20];
-							char direccion[40];
-							char RFC[20];
+							string email;
+							string nombre;
+							string telefono;
+							string direccion;
+							string RFC;
 							int ID;
+							fflush(stdin);
 							cout<<"Nombre: ";
-							cin>>nombre;
+							getline(cin,nombre);
 							cout<<"Telefono: ";
-							cin>>telefono;
+							getline(cin,telefono);
 							cout<<"Direccion: ";
-							cin>>direccion;
+							getline(cin,direccion);
 							cout<<"RFC: ";
-							cin>>RFC;
+							getline(cin,RFC);
 							cout<<"Email: ";
-							cin>>email;
+							getline(cin,email);
 							for(int i = 0; i < maxClientes; i++){
 									if(clientes[i] == NULL){
 										ID = i;

@@ -6,3 +6,11 @@ RFC: AHKJ1717JXX
 ID: 2
 Sueldo: $6000
 
+Empleado de servicio
+Nombre: asda sdasd ads
+Telefono: asdasd
+Dirección: adsasda dads asd
+RFC: asdads asd
+ID: 5
+Sueldo: $6000
+

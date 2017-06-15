@@ -7,12 +7,12 @@
 using namespace std;
 
 class Empleado: public Persona {
-	char puesto[20];
+	string puesto;
 	float sueldo;
 	public: 
 		Empleado(){};
 		~Empleado(){};
-		Empleado(int _sueldo, char* _puesto, char _nombre[], char _telefono[], char _direccion[], char _RFC[], int _ID);
+		Empleado(int _sueldo, string _puesto, string _nombre, string _telefono, string _direccion, string _RFC, int _ID);
 		void mostrar() const;	
 		static int noEmpleados;
 		static void agregarEmpleado(){Empleado::noEmpleados++;};
@@ -22,9 +22,9 @@ class Empleado: public Persona {
 
 int Empleado::noEmpleados = 0;
 
-Empleado::Empleado(int _sueldo, char* _puesto, char _nombre[], char _telefono[], char _direccion[], char _RFC[], int _ID): Persona(_nombre, _telefono, _direccion, _RFC, _ID){
+Empleado::Empleado(int _sueldo, string _puesto, string _nombre, string _telefono, string _direccion, string _RFC, int _ID): Persona(_nombre, _telefono, _direccion, _RFC, _ID){
 	sueldo = _sueldo;
-	strcpy(puesto,_puesto);
+	puesto = _puesto;
 }
 void Empleado::mostrar() const{
 	Persona::mostrar();

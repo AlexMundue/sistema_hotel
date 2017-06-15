@@ -1,5 +1,8 @@
 #include "Empleado.cpp"
 #include <fstream>
+#include <string.h>
+using namespace std;
+
 class Administrador: public Empleado{
 	float bonos;
 	const char *ubicacionReporte = "Reportes/Empleados/Administradores.txt";
@@ -7,7 +10,7 @@ class Administrador: public Empleado{
 		static int noAdministradores;
 		Administrador(){};
 		~Administrador(){};
-		Administrador(char _nombre[], char _telefono[], char _direccion[], char _RFC[], int _ID);
+		Administrador(string _nombre, string _telefono, string _direccion, string _RFC, int _ID);
 		static void aumentarAdministradores(){Administrador::noAdministradores++;};
 		static void disminuirAdministradores(){Administrador::noAdministradores--;};
 		void reportar();
@@ -16,7 +19,7 @@ class Administrador: public Empleado{
 
 int Administrador::noAdministradores = 0;
 
-Administrador::Administrador(char _nombre[], char _telefono[], char _direccion[], char _RFC[], int _ID): Empleado(8000, "Administrador", _nombre, _telefono, _direccion, _RFC, _ID){
+Administrador::Administrador(string _nombre, string _telefono, string _direccion, string _RFC, int _ID): Empleado(8000, "Administrador", _nombre, _telefono, _direccion, _RFC, _ID){
 	
 }
 

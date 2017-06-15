@@ -12,7 +12,7 @@ Telefono: 3379854613
 Dirección: Juan de la barranca 847
 RFC: JDJD7895LNN
 ID: 1
-Sueldo: $8750
+Sueldo: $8000
 
 Empleado de servicio
 Nombre: Juan Antonio Salamanca
@@ -20,5 +20,29 @@ Telefono: 3311875244
 Dirección: Juarez 222
 RFC: AHKJ1717JXX
 ID: 2
+Sueldo: $6000
+
+Gerente
+Nombre: asdasd
+Telefono: asd
+Dirección: asd
+RFC: ads asd asd asd
+ID: 3
+Sueldo: $25000
+
+Administrador
+Nombre: asd asd asd ads asd
+Telefono: adsds ad ad asd
+Dirección: adssadd adasd
+RFC: asdasd 
+ID: 4
+Sueldo: $8000
+
+Empleado de servicio
+Nombre: asda sdasd ads
+Telefono: asdasd
+Dirección: adsasda dads asd
+RFC: asdads asd
+ID: 5
 Sueldo: $6000
 
